@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -44,6 +45,13 @@ public class CardPageAdapter extends PagerAdapter {
         tvPage.setText(mListData.get(position));
 
         container.addView(inflate);
+
+        tvPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "测试点击", Toast.LENGTH_SHORT);
+            }
+        });
         return inflate;
     }
 

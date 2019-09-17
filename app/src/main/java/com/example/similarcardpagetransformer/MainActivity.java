@@ -6,6 +6,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.similarcardpagetransformer.transformer.CardPageTransformer;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,9 +33,14 @@ public class MainActivity extends AppCompatActivity {
         listData.add("页面4");
         listData.add("页面5");
         listData.add("页面6");
+        listData.add("页面7");
+        listData.add("页面8");
+        listData.add("页面9");
+        listData.add("页面10");
 
-
-        CardPageAdapter cardPageAdapter = new CardPageAdapter(this,listData);
+        mViewPager.setOffscreenPageLimit(3);
+        CardPageAdapter cardPageAdapter = new CardPageAdapter(this, listData);
+        mViewPager.setPageTransformer(true, new CardPageTransformer(mViewPager));
         mViewPager.setAdapter(cardPageAdapter);
     }
 }
