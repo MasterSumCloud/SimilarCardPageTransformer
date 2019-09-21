@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.viewpager.widget.ViewPager;
 
 /**
@@ -31,7 +32,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         if (position > -1 && position < 0) {
             float rotation = position * 30;
             page.setRotation(rotation);
-            page.setAlpha((position * position * position + 1));
+            page.setAlpha((position + 1));
         } else if (position > mOffscreenPageLimit - 1) {
             page.setAlpha((float) (1 - position + Math.floor(position)));
         } else {
@@ -39,6 +40,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
             page.setAlpha(1);
         }
 
+        Log.d("Position值", "测试" + position);
         //对对应页面设置缩放比例
         if (position == 0) {
             page.setScaleX(CENTER_PAGE_SCALE);
@@ -52,7 +54,7 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         //针对显示的 进行偏移 需要其他样式 修改这个
         if (position >= 0) {
             //例子 向下 具体根据你的需求来定义
-            page.setTranslationY(120 * position);
+            page.setTranslationY(130 * position);
             page.setTranslationX(-page.getWidth() * position);
             //例子 向上
 //            page.setTranslationY(-120 * position);
@@ -67,10 +69,13 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         }
         //超出部分一律不显示
         if (position >= mOffscreenPageLimit || position <= -1) {
-            page.setVisibility(View.GONE);
+            page.setVisibility(View.INVISIBLE);
         } else {
             page.setVisibility(View.VISIBLE);
         }
+
+        //设置阴影的
+//        ViewCompat.setElevation(page, (mOffscreenPageLimit - position) * 3);
     }
 
 
