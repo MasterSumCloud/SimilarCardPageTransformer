@@ -1,8 +1,10 @@
 package com.example.similarcardpagetransformer;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +21,19 @@ import java.util.ArrayList;
  */
 public class CardPageAdapter extends PagerAdapter {
     private Context mContext;
-    private ArrayList<String> mListData;
+    private int[] mListData;
+    private OnItemClickListener mOnItemClickListener;
 
 
-    public CardPageAdapter(Context context, ArrayList<String> listData) {
+    public CardPageAdapter(Context context, int[] listData) {
         this.mListData = listData;
         this.mContext = context;
     }
 
+
     @Override
     public int getCount() {
-        return mListData == null ? 0 : mListData.size();
+        return mListData == null ? 0 : mListData.length;
     }
 
     @Override
@@ -39,24 +43,37 @@ public class CardPageAdapter extends PagerAdapter {
 
     @NonNull
     @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+    public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         View inflate = ConstraintLayout.inflate(mContext, R.layout.item_layout, null);
         TextView tvPage = inflate.findViewById(R.id.tv_page);
-        tvPage.setText(mListData.get(position));
-
-        container.addView(inflate);
-
-        tvPage.setOnClickListener(new View.OnClickListener() {
+        tvPage.setText("当前页面"+position);
+        ImageView headView = inflate.findViewById(R.id.iv_head);
+        headView.setImageResource(mListData[position]);
+        inflate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "测试点击", Toast.LENGTH_SHORT);
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.OnItemClick(view, position);
+                }
             }
         });
+
+        container.addView(inflate);
         return inflate;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+        View view = (View) object;
+        container.removeView(view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+
+    public interface OnItemClickListener {
+        void OnItemClick(View v, int position);
     }
 }

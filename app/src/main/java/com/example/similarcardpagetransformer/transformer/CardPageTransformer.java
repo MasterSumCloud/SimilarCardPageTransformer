@@ -2,6 +2,7 @@ package com.example.similarcardpagetransformer.transformer;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
@@ -17,10 +18,11 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
     private static final float CENTER_PAGE_SCALE = 0.85f;
 
     //页面显示限制 一般为mCurrentViewPager.getOffscreenPageLimit()   PS:特别提示  如果这样用需要再外面设置 否则不显示
-    private int mOffscreenPageLimit = 3;
+    private int mOffscreenPageLimit;
 
     public CardPageTransformer(ViewPager viewPager) {
         this.mCurrentViewPager = viewPager;
+        this.mOffscreenPageLimit = mCurrentViewPager.getOffscreenPageLimit();
     }
 
     @Override
@@ -41,7 +43,6 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
         if (position == 0) {
             page.setScaleX(CENTER_PAGE_SCALE);
             page.setScaleY(CENTER_PAGE_SCALE);
-            page.setClickable(true);
         } else {
             float scaleFactor = Math.min(CENTER_PAGE_SCALE - position * 0.1f, CENTER_PAGE_SCALE);
             page.setScaleX(scaleFactor);
@@ -63,7 +64,6 @@ public class CardPageTransformer implements ViewPager.PageTransformer {
 //            page.setTranslationY(0);
 //            page.setTranslationX(-page.getWidth() * position + 100 * position);
 
-            page.setClickable(false);
         }
         //超出部分一律不显示
         if (position >= mOffscreenPageLimit || position <= -1) {
