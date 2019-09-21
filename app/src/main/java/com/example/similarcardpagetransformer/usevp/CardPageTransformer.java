@@ -1,4 +1,4 @@
-package com.example.similarcardpagetransformer.transformer;
+package com.example.similarcardpagetransformer.usevp;
 
 import android.util.Log;
 import android.view.View;

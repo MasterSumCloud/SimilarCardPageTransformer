@@ -3,44 +3,41 @@ package com.example.similarcardpagetransformer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.Button;
 
-import com.example.similarcardpagetransformer.transformer.CardPageTransformer;
+import com.example.similarcardpagetransformer.usevp.CardPageAdapter;
+import com.example.similarcardpagetransformer.usevp.CardPageTransformer;
+import com.example.similarcardpagetransformer.usevp.UseViewPagerActivity;
 
-import java.util.ArrayList;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class MainActivity extends AppCompatActivity {
 
-    private ViewPager mViewPager;
+    private Button mBtGoVpIml;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mViewPager = findViewById(R.id.vp_cardpage);
-        initData();
+        mBtGoVpIml = findViewById(R.id.button_go_vp);
+
+        initListener();
     }
 
-    /**
-     * 初始化假数据
-     */
-    private void initData() {
-        int[] listData = {R.mipmap.index1,R.mipmap.index2,R.mipmap.index3,R.mipmap.index4,R.mipmap.index5,R.mipmap.index1,R.mipmap.index2,R.mipmap.index3,R.mipmap.index4,R.mipmap.index5};
+    private void initListener() {
+        mBtGoVpIml.setOnClickListener(this);
+    }
 
-        mViewPager.setOffscreenPageLimit(3);
-        CardPageAdapter cardPageAdapter = new CardPageAdapter(this, listData);
-        cardPageAdapter.setOnItemClickListener(new CardPageAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(View v, int position) {
-                Log.d("点击测试", "点击的页面" + position);
 
-            }
-        });
-        mViewPager.setPageTransformer(true, new CardPageTransformer(mViewPager));
-        mViewPager.setAdapter(cardPageAdapter);
-
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button_go_vp:
+                startActivity(new Intent(this, UseViewPagerActivity.class));
+                break;
+        }
     }
 }

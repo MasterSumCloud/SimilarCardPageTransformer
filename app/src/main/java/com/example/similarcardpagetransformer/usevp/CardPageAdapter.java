@@ -1,4 +1,4 @@
-package com.example.similarcardpagetransformer;
+package com.example.similarcardpagetransformer.usevp;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
+
+import com.example.similarcardpagetransformer.R;
 
 import java.util.ArrayList;
 
