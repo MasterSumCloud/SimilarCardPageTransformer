@@ -18,6 +18,7 @@
         </activity>
 
         <activity android:name=".usevp.UseViewPagerActivity" />
+        <activity android:name=".smdraw.SimilarGalleryActivity" />
     </application>
 
 </manifest>

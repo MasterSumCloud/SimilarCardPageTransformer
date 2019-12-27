@@ -17,4 +17,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_draw_sm_car"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="ViewPager画廊效果"
+        app:layout_constraintEnd_toEndOf="@+id/button_go_vp"
+        app:layout_constraintStart_toStartOf="@+id/button_go_vp"
+        app:layout_constraintTop_toBottomOf="@+id/button_go_vp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
